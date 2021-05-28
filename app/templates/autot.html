@@ -1,0 +1,91 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<br />
+<div id="add-div"></div>
+<br />
+
+<h1>Myytävät automme</h1>
+
+<a onclick="showaddform()" class="btn btn-primary">Lisää auto myyntiin</a>
+<div>
+{% for a in autot %}
+<!-- <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="..." alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{m.nimi}}</h5>
+          <p class="card-text"><small class="text-muted">{{m.puhelinnumero}}</small></p>
+          <p class="card-text"><small class="text-muted">{{m.email}}</small></p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        <h4 class="card-title">{{a.merkki}}</h4>
+        <h6 class="card-title">{{a.malli}}</h6>
+    </div>
+    <div class="card-body">
+        <p class="card-text text-muted"><b>Vuosimalli</b><br/>{{a.vuosimalli}}</p>
+        <p class="card-text text-muted"><b>Mittarilukema</b><br/>{{a.mittarilukema}} km</p>
+        <p class="card-text text-muted"><b>Hinta</b><br/>{{a.hinta}} €</p>
+        <p class="card-text text-muted"><b>Väri</b><br/>{{a.vari}}</p>
+        <p class="card-text text-muted"><b>Auton myyntiä hoitaa</b><br/>{{a.myyja.nimi}}</p>
+    </div>
+    <div class="card-footer">
+        <a href="/poista-auto/{{a.id}}/" class="btn btn-danger">Poista</a>
+    </div>
+</div>
+
+{% endfor %}
+</div>
+<script>
+
+    let x = `
+    <h2>Lisää myytävän auton tiedot</h2>
+    
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+            <form method="post" action="/lisaa-auto/">
+    
+                {%csrf_token %}
+                <input class="card-text" class="card-text" type="text" placeholder="Merkki" name="merkki">
+                <input class="card-text" type="text" placeholder="Malli" name="malli">
+                <input class="card-text" type="text" placeholder="Vuosimalli" name="vuosimalli">
+                <input class="card-text" type="text" placeholder="Mittarilukema (km)" name="mittarilukema">
+                <input class="card-text" type="text" placeholder="Hintapyyntö" name="hinta">
+                <input class="card-text" type="text" placeholder="Auton väri" name="vari">
+                <input class="card-text" type="text" placeholder="Auton myyjä" name="myyja">
+
+                <select id="myyja" name="myyja">
+                {% for m in myyjat %}
+                  <option value="{{m.id}}">{{m.nimi}}</option>
+                {% endfor %}
+                </select>
+                
+                <br/>
+                <input type="submit" value="Vahvista" class="btn btn-success btn-sm" name="">
+                <input type="submit" id="hide-btn" class="btn btn-secondary btn-sm" onclick="hideaddform()" value="Peruuta" name="">
+            </form>
+        </div>
+    </div>`
+
+    function showaddform() {
+        document.getElementById("add-div").innerHTML = x
+    }
+
+    function hideaddform() {
+        document.getElementById("add-div").innerHTML = ""
+    }
+
+</script>
+
+
+
+{% endblock %}

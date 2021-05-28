@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<br />
+<div id="add-div"></div>
+<br />
+
+
+    <h1>Myyntiämme hoitaa</h1> 
+    <a onclick="showaddform()" class="btn btn-primary">Uusi myyjä</a>
+
+
+<div>
+{% for m in myyjat %}
+ 
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        <h4 class="card-title">{{m.nimi}}</h4>
+        <i>Automyyjä</i>
+        <i>{{m.titteli}}</i>
+    </div>
+    <div class="card-body">
+        <p class="card-text text-muted">{{m.puhelinnumero}}</p>
+        <p class="card-text text-muted">{{m.email}}</p>
+        <p>ID: {{m.id}}</p>
+    </div>
+    <div class="card-footer">
+        <a href="/poista-myyja/{{m.id}}/" class="btn btn-danger">Poista</a>
+    </div>
+</div>
+
+{% endfor %}
+</div>
+<script>
+
+    let x = `
+    <h2>Please fill in form</h2>
+    
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+            <form method="post" action="/lisaa-myyja/">
+    
+                {%csrf_token %}
+                <input class="card-text" class="card-text" type="text" placeholder="Nimi" name="nimi">
+                <input class="card-text" class="card-text" type="text" placeholder="Titteli" name="titteli">
+                <input class="card-text" type="text" placeholder="puhelinnumero" name="puhelinnumero">
+                <input class="card-text" type="text" placeholder="email" name="email">
+                <br/>
+                <input type="submit" value="Confirm" class="btn btn-success btn-sm" name="">
+                <input type="submit" id="hide-btn" class="btn btn-secondary btn-sm" onclick="hideaddform()" value="Cancel" name="">
+            </form>
+        </div>
+    </div>`
+
+    function showaddform() {
+        document.getElementById("add-div").innerHTML = x
+    }
+
+    function hideaddform() {
+        document.getElementById("add-div").innerHTML = ""
+    }
+
+</script>
+
+
+
+{% endblock %}

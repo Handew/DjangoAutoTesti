@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Myyja(models.Model):
-    nimi = models.CharField(max_length=50, default='tyhja')
+    nimi = models.CharField(max_length=50, default='nimi')
     titteli = models.CharField(max_length=50, default='titteli')
     puhelinnumero = models.CharField(max_length=20, default='00000000')
     email = models.EmailField(max_length=50, default='etu.suku@malli.fi')

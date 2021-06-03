@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Hannun hämärä automyynti</title>
+</head>
+<body>
+<center>
+<div class="card" style="width: 25rem; margin-top: 50px;">
+
+    <div class="card-header">
+        <h5>Kirjautuminen</h5>
+        <div class="card-body">
+            <form id="myForm" method="post" action="/login/">
+
+                {%csrf_token %}
+                <div class="form-group">
+                    <label>Käyttäjänimi</label>
+                    <input type="text" name="kayttajanimi">
+                </div>
+                <div class="form-group">
+                    <label>Salasana</label>
+                    <input type="password" name="salasana">
+                </div>
+
+                <input type="submit" value="Login" class="btn btn-success btn-sm">
+                <input type="button" onclick="reset()" class="btn btn-secondary btn-sm" value="Tyhjennä">
+
+            </form>
+        </div>
+        <input type="button" onclick="window.location.href='/admin/'" class="btn btn-warning btn-sm"
+            value="Admin pages">
+    </div>
+</div>
+</center>
+
+<script>
+    function reset() {
+        document.getElementById("myForm").reset();
+    }
+</script>
+
+</body>
+</html>

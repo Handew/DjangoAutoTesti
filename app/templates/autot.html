@@ -8,23 +8,11 @@
 
 <h1>Myytävät automme</h1>
 
-<a onclick="showaddform()" class="btn btn-primary">Lisää auto myyntiin</a>
 <div>
+<a onclick="showaddform()" class="btn btn-primary">Lisää auto myyntiin</a>
+</div>
+
 {% for a in autot %}
-<!-- <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="..." alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">{{m.nimi}}</h5>
-          <p class="card-text"><small class="text-muted">{{m.puhelinnumero}}</small></p>
-          <p class="card-text"><small class="text-muted">{{m.email}}</small></p>
-        </div>
-      </div>
-    </div>
-  </div> -->
   
 <div class="card" style="width: 18rem;">
     <div class="card-header">
@@ -44,7 +32,7 @@
 </div>
 
 {% endfor %}
-</div>
+
 <script>
 
     let x = `
@@ -53,7 +41,7 @@
     <div class="card" style="width: 20rem;">
         <div class="card-body">
             <form method="post" action="/lisaa-auto/">
-    
+                <div>
                 {%csrf_token %}
                 <input class="card-text" class="card-text" type="text" placeholder="Merkki" name="merkki">
                 <input class="card-text" type="text" placeholder="Malli" name="malli">
@@ -61,15 +49,16 @@
                 <input class="card-text" type="text" placeholder="Mittarilukema (km)" name="mittarilukema">
                 <input class="card-text" type="text" placeholder="Hintapyyntö" name="hinta">
                 <input class="card-text" type="text" placeholder="Auton väri" name="vari">
-                <input class="card-text" type="text" placeholder="Auton myyjä" name="myyja">
 
-                <select id="myyja" name="myyja">
+                <select id="myyja" name="myyja" class="card-text">
                 {% for m in myyjat %}
                   <option value="{{m.id}}">{{m.nimi}}</option>
                 {% endfor %}
                 </select>
-                
-                <br/>
+
+                </div>
+                <br>
+
                 <input type="submit" value="Vahvista" class="btn btn-success btn-sm" name="">
                 <input type="submit" id="hide-btn" class="btn btn-secondary btn-sm" onclick="hideaddform()" value="Peruuta" name="">
             </form>
